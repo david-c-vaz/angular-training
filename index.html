@@ -9,8 +9,9 @@
 
 		<br/>
 		<p ng-repeat="student in students">
-			Full Name: 	{{student.firstName+" "+student.lastName}}
+			Full Name: 	{{student.fullName()}}
 		</p>
+		<p ng-bind="displayAllStudents()"></p>
 		<p ng-bind="counter+1"></p>
 	</div>	
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
@@ -20,11 +21,19 @@
 			this.rollNumber=rollNumber;
 			this.firstName=firstName;
 			this.lastName=lastName;
+			this.fullName=function(){
+				return this.firstName+" "+this.lastName;
+			}
 		}
 		$scope.students=[];
 	   	$scope.students.push(new Student(1001,"Ken","Peters"));
 	   	$scope.students.push(new Student(1002,"Samuel","Swares"));
 	   	$scope.students.push(new Student(1003,"Jim","Carry"));
+	   	$scope.displayAllStudents=function(){
+	   		return $scope.students.reduce(function (prev,cur,index){
+	   			return prev+(index>0 ? ", "+cur.fullName() : cur.fullName());
+	   		},"This following student are registered in our class : ");
+	   	};
 	}
 	</script>
 </body>
