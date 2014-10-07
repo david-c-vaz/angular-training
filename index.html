@@ -2,14 +2,16 @@
 <html>
 <body ng-app="">
 	<div ng-controller="personController" ng-init="counter=1">
-		<p ng-repeat="student in students">
+	<input type="text" ng-model="search"/>
+		<p ng-repeat="student in students | filter:search| orderBy: 'firstName'">
+			Roll Number: <input type="text" name="students[]['rollNumber']" ng-model="student.rollNumber"/>
 			First Name: <input type="text" name="students[]['firstName']" ng-model="student.firstName"/>
 			Last Name: <input type="text" name="students[]['lastName']" ng-model="student.lastName"/>
 		</p>
 
 		<br/>
 		<p ng-repeat="student in students">
-			Full Name: 	{{student.fullName()}}
+			Full Name: 	{{student.fullName()|lowercase}}
 		</p>
 		<p ng-bind="displayAllStudents()"></p>
 		<p ng-bind="counter+1"></p>
