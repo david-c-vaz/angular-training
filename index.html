@@ -2,11 +2,15 @@
 <html>
 <body ng-app="">
 	<div ng-controller="personController" ng-init="counter=1">
-		First Name: <input type="text" name="students[]['firstName']" ng-model="students[0].firstName"/>
-		Last Name: <input type="text" name="students[]['lastName']" ng-model="students[0].lastName"/>
+		<p ng-repeat="student in students">
+			First Name: <input type="text" name="students[]['firstName']" ng-model="student.firstName"/>
+			Last Name: <input type="text" name="students[]['lastName']" ng-model="student.lastName"/>
+		</p>
+
 		<br/>
-		<p>Full Name: 	{{students[0].firstName+" "+students[0].lastName}}</p>
-		<p>Full Name: 	{{students[1].firstName+" "+students[1].lastName}}</p>
+		<p ng-repeat="student in students">
+			Full Name: 	{{student.firstName+" "+student.lastName}}
+		</p>
 		<p ng-bind="counter+1"></p>
 	</div>	
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
@@ -20,6 +24,7 @@
 		$scope.students=[];
 	   	$scope.students.push(new Student(1001,"Ken","Peters"));
 	   	$scope.students.push(new Student(1002,"Samuel","Swares"));
+	   	$scope.students.push(new Student(1003,"Jim","Carry"));
 	}
 	</script>
 </body>
